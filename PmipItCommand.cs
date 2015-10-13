@@ -65,9 +65,18 @@ namespace PmipIt
 				{
 					var expression = $"{{,,mono.dll}}mono_pmip((void*)0x{Regex.Replace(stackInfo, "\\(|\\)", string.Empty)})";
 					var result = debugger.GetExpression(expression, true);
-					stackInfo = result.IsValidValue ? result.Value : string.Concat("Unable to evaluate ", expression);
+
+					if (!result.IsValidValue)
+						stackInfo = string.Concat("Unable to evaluate ", expression);
+					else if (!result.Value.EndsWith("<NULL>"))
+						stackInfo = result.Value;
 				}
 
+				if (!string.IsNullOrEmpty(frame.Module))
+				{
+					_package.OutputWindowDebugPane.OutputString(frame.Module);
+					_package.OutputWindowDebugPane.OutputString("!");
+				}
 				_package.OutputWindowDebugPane.OutputString(stackInfo);
 				_package.OutputWindowDebugPane.OutputString(Environment.NewLine);
 			}
