@@ -17,13 +17,13 @@ namespace PmipIt
 		public const string PackageGuidString = "0aa8493b-87d6-453f-b5c9-89acdb7a3c93";
 
 		public DTE Dte => (DTE)GetService(typeof(DTE));
-		public IVsOutputWindow OutputWindow => GetGlobalService(typeof (SVsOutputWindow)) as IVsOutputWindow;
+		public IVsOutputWindow OutputWindow => GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
 
 		public IVsOutputWindowPane OutputWindowDebugPane
 		{
 			get
 			{
-				var debugPaneGuid = VSConstants.GUID_OutWindowDebugPane; 
+				var debugPaneGuid = VSConstants.GUID_OutWindowDebugPane;
 				IVsOutputWindowPane debugPane;
 				OutputWindow.GetPane(ref debugPaneGuid, out debugPane);
 				return debugPane;

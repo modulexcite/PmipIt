@@ -35,13 +35,7 @@ namespace PmipIt
 			private set;
 		}
 
-		private IServiceProvider ServiceProvider
-		{
-			get
-			{
-				return _package;
-			}
-		}
+		private IServiceProvider ServiceProvider => _package;
 
 		public static void Initialize(PmipItPackage package)
 		{
@@ -64,7 +58,7 @@ namespace PmipIt
 
 			_package.OutputWindowDebugPane.Activate();
 
-            foreach (StackFrame frame in frames)
+			foreach (StackFrame frame in frames)
 			{
 				var stackInfo = frame.FunctionName;
 				if (Regex.IsMatch(stackInfo, "\\d+()"))
